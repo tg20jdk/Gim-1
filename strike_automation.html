@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address and Phone Data</title>
+    <style>
+        body {
+            background-color: black;
+            color: green;
+            font-family: Arial, sans-serif;
+            padding: 32px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            color: green;
+            border: none;
+            border-bottom: 2px solid #FFA500;
+            background-color: black;
+            font-weight: bold;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            color: green;
+            background-color: black;
+            border: 2px solid green;
+            font-weight: bold;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .radio-group label {
+            margin-right: 15px;
+        }
+        .footer {
+            text-align: center;
+            color: red;
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>G.I.M</h1>
+        <input type="text" id="address" placeholder="ENTER USA ADDRESS">
+        <input type="text" id="phone" placeholder="ENTER USA PHONE NO">
+        <input type="text" id="lawyer-name" placeholder="ENTER LAWYER NAME">
+        <input type="text" id="email" placeholder="ENTER YOUR EMAIL ID">
+        <input type="text" id="song-channel-name" placeholder="ENTER SONG CHANNEL NAME">
+        <input type="text" id="song-name" placeholder="ENTER SONG NAME">
+        <input type="text" id="song-channel-link" placeholder="ENTER SONG CHANNEL LINK">
+        <input type="text" id="song-source-link" placeholder="ENTER SONG SOURCE LINK">
+        <input type="text" id="video-link" placeholder="ENTER VIDEO LINK FOR STRIKE">
+        <button onclick="openEmail()">OPEN EMAIL</button>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="method" value="1" checked> Method 1
+            </label>
+            <label>
+                <input type="radio" name="method" value="2"> Method 2
+            </label>
+        </div>
+        <h2>SELECT METHOD:</h2>
+        <input type="text" id="reply-name" placeholder="ENTER NAME FOR GENERATE REPLY TEXT">
+        <button onclick="copyReplyText()">COPY REPLY TEXT</button>
+        <button onclick="copyLicensedText()">COPY LICENSED SONG REPLY TEXT</button>
+        <div class="footer">Tool by Group of Islamic Member</div>
+    </div>
+
+    <script>
+        const predefinedData = [
+            { address: "123 Main St, Anytown, USA", phone: "555-1234" },
+            { address: "456 Oak St, Sometown, USA", phone: "555-5678" }
+        ];
+
+        function getRandomAddressAndPhoneNumber() {
+            const index = Math.floor(Math.random() * predefinedData.length);
+            return predefinedData[index];
+        }
+
+        function updateAddressAndPhoneNumber() {
+            const randomData = getRandomAddressAndPhoneNumber();
+            document.getElementById('address').value = randomData.address;
+            document.getElementById('phone').value = randomData.phone;
+            alert('Address and Phone Number updated!');
+        }
+
+        function openEmail() {
+            const lawyerName = document.getElementById('lawyer-name').value;
+            const email = document.getElementById('email').value;
+            const songChannelName = document.getElementById('song-channel-name').value;
+            const songName = document.getElementById('song-name').value;
+            const songChannelLink = document.getElementById('song-channel-link').value;
+            const songSourceLink = document.getElementById('song-source-link').value;
+            const videoLink = document.getElementById('video-link').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const recipient = "copyright@youtube.com";
+            const subject = "DMCA takedown request";
+            let body = "";
+
+            const method = document.querySelector('input[name="method"]:checked').value;
+
+            if (method == "1") {
+                body = `
+Dear YouTube Copyright Compliance Team,
+
+I am writing to you in my capacity as legal counsel, the copyright holder "${songChannelName}" of the musical composition entitled "${songName}". It has been brought to our attention that this copyrighted work has been used without proper authorization in a video available on your platform.
+
+Infringing Content Details:
+
+Video URL: ${videoLink}
+
+To verify my client's rights and the existence of the original material music "${songName}", I am providing the link to the authorized version of the music track:
+Authorized Music URL: ${songSourceLink}
+
+Additionally, I affirm the following statements under penalty of perjury:
+1. "I have a good faith belief that the use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law."
+2. "The information in this notification is accurate, and I am authorized to act on behalf of the owner of an exclusive right that is allegedly infringed."
+
+My Contact Information:
+${email}
+${address}
+${phone}
+
+We respectfully request the prompt removal of the infringing content to prevent any further unauthorized use of my client's copyrighted work.
+
+Please contact me at the information provided above should you require further information or wish to discuss this matter.
+
+Thank you for your immediate attention to this matter.
+`;
+            } else {
+                body = `
+Hello YouTube Team,
+
+My name is ${lawyerName}, I am the lawyer representing the YouTube channel “${songChannelName}”
+
+${songChannelLink}
+
+I would like to submit a copyright takedown request on behalf of my client “${songChannelName}” who is the creator of the song “${songName}”.
+
+The song “${songName}” has been used without my client's permission in these videos:
+
+${videoLink}
+
+For each video, we allege infringement on the following copyrighted work:
+
+Song: ${songName}
+
+Basis for asserting the claim: The copyrighted song, “${songName}”, was used in the videos without my client's permission, constituting unauthorized use of their copyrighted work.
+
+I agree to the following statements:
+
+I have a good faith belief that the use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law.
+
+The information in this notification is accurate, and under penalty of perjury, I am the owner, or an agent authorized to act on behalf of the owner, of an exclusive right that is allegedly infringed.
+
+I may be contacted at:
+${email}
+${address}
+${phone}
+`;
+            }
+
+            const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+        }
+
+        function copyReplyText() {
+            const name = document.getElementById('reply-name').value;
+            const copiedText = `My full legal name: ${name}`;
+            navigator.clipboard.writeText(copiedText).then(() => {
+                alert('Text copied');
+            });
+        }
+
+        function copyLicensedText() {
+            const licensedText = `
+“I am aware that my client’s song is licensed, but it is still against my client’s exclusive rights to have it used without permission in some videos. As much as I like the license agreement, I think we should also address situations in which my client’s protected information is used without permission. I respectfully ask for more help in resolving this matter and advice on what to do in the event that unauthorized use occurs even though the song has a license. My client’s intellectual property must be protected, thus I would be very grateful for any assistance in getting this issue resolved quickly. We appreciate your cooperation and attention in making sure that this copyright issue is handled correctly.”
+`;
+            navigator.clipboard.writeText(licensedText).then(() => {
+                alert('Licensed song reply text copied');
+            });
+        }
+    </script>
+</body>
+</html>
